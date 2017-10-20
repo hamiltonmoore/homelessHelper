@@ -3,10 +3,12 @@ package com.example.helper.helperservice;
 import com.example.helper.helpermodel.Helper;
 import com.example.helper.repository.HelperRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
 public class HelperServiceImpl implements HelperService {
     @Autowired
     HelperRepository helperRepository;
@@ -32,8 +34,8 @@ public class HelperServiceImpl implements HelperService {
 
     @Transactional
     @Override
-    public void update(Helper helper) {
-        helperRepository.update(helper);
+    public void update(Helper helper, int id) {
+        helperRepository.update(helper, id);
 
     }
 

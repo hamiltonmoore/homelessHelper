@@ -9,7 +9,7 @@ public interface HelperRepository {
     Helper getById(int id);
     List<Helper> getByContact_Type(String contact_type);
     List<Helper> get();
-    void update(Helper customer);
+    void update(Helper customer, int id);
     void createTable();
     void delete(int id);
 }

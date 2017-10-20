@@ -1,6 +1,7 @@
 package com.example.helper.helperservice;
 
 import com.example.helper.helpermodel.Helper;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ public interface HelperService {
     Helper getById(int id);
     List<Helper> getByContact_Type(String contact_type);
     List<Helper> get();
-    void update(Helper customer);
+    void update(Helper customer, int id );
     void createTable();
     void delete(int id);
 }

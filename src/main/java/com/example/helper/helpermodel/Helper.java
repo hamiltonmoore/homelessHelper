@@ -1,8 +1,11 @@
 package com.example.helper.helpermodel;
 
+import java.lang.reflect.Field;
+
+// Database model
 public class Helper {
     String contact;
-    String contact_type;
+    String contact_type;    // TODO: convert to Java naming convention
     Double longitude;
     Double latitude;
     String location_1_address;
@@ -10,6 +13,44 @@ public class Helper {
     String location_1_state;
     String notes;
     String phone_number;
+
+//    @Override
+//    public String toString() {
+//        return String.format("contact = %s, contact_type = %s"
+//        ,contact
+//        ,contact_type);
+//    }
+
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        String newLine = System.getProperty("line.separator");
+
+        result.append( this.getClass().getName() );
+        result.append( " Object {" );
+        result.append(newLine);
+
+        //determine fields declared in this class only (no fields of superclass)
+        Field[] fields = this.getClass().getDeclaredFields();
+
+        //print field names paired with their values
+        for ( Field field : fields  ) {
+            result.append("  ");
+            try {
+                result.append( field.getName() );
+                result.append(": ");
+                //requires access to private field:
+                result.append( field.get(this) );
+            } catch ( IllegalAccessException ex ) {
+                System.out.println(ex);
+            }
+            result.append(newLine);
+        }
+        result.append("}");
+
+        return result.toString();
+    }
 
     public String getContact() {
         return contact;

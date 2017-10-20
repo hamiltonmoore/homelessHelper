@@ -17,21 +17,22 @@ public class HelperRepositoryImpl implements HelperRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    private String CREATE_SQL = "CREATE TABLE IF NOT EXISTS helper (id serial not null, contact text, contact_type text " +
-            "longitude double, latitude double, location_1_address text, location_1_city text, location_1_state text, " +
+    private String CREATE_SQL = "CREATE TABLE IF NOT EXISTS helper (id serial not null, contact text, contact_type text, " +
+            "longitude double precision, latitude double precision, location_1_address text, location_1_city text, location_1_state text, " +
             "notes text, phone_number text, constraint helper_pkey primary key (id));";
 
     public void createTable() {
         jdbcTemplate.execute(CREATE_SQL);
     }
 
-    private final String INSERT_SQL = "INSERT INTO helper (contact, contact_type, longitude, latitude, location_1_address " +
-        " location_1_city, location_1_state, notes, phone_number) VALUES (?,?,?,?,?,?,?,?,?)";
+    private final String INSERT_SQL = "INSERT INTO helper (contact, contact_type, longitude, latitude, " +
+            "location_1_address, location_1_city, location_1_state, notes, phone_number) VALUES (?,?,?,?,?,?,?,?,?)";
 
     @Override
     public void add(Helper helper) {
-        jdbcTemplate.update(INSERT_SQL, helper.getContact(), helper.getContact_type(), helper.getLatitude(),
-                helper.getLongitude(), helper.getLocation_1_address(), helper.getLocation_1_city(),
+        System.out.println("*** helper = " + helper.toString());
+        jdbcTemplate.update(INSERT_SQL, helper.getContact(), helper.getContact_type(), helper.getLongitude(),
+                helper.getLatitude(), helper.getLocation_1_address(), helper.getLocation_1_city(),
                 helper.getLocation_1_state(), helper.getNotes(), helper.getPhone_number());
     }
 
@@ -59,10 +60,10 @@ public class HelperRepositoryImpl implements HelperRepository {
             ;
 
     @Override
-    public void update(Helper helper) {
+    public void update(Helper helper, int id) {
         jdbcTemplate.update(UPDATE_SQL, helper.getContact(), helper.getContact_type(), helper.getLatitude(),
                 helper.getLongitude(), helper.getLocation_1_address(), helper.getLocation_1_city(),
-                helper.getLocation_1_state(), helper.getNotes(), helper.getPhone_number());
+                helper.getLocation_1_state(), helper.getNotes(), helper.getPhone_number(), id);
     }
 
     private final String DELETE_SQL = "DELETE FROM helper WHERE id=?";
