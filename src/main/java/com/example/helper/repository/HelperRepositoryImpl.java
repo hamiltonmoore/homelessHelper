@@ -22,6 +22,7 @@ public class HelperRepositoryImpl implements HelperRepository {
             "notes text, phone_number text, constraint helper_pkey primary key (id));";
 
     public void createTable() {
+        System.out.println(" +*+*+*+* creating table: ");
         jdbcTemplate.execute(CREATE_SQL);
     }
 
@@ -36,15 +37,14 @@ public class HelperRepositoryImpl implements HelperRepository {
                 helper.getLocation_1_state(), helper.getNotes(), helper.getPhone_number());
     }
 
-    private final String SELECT_BY_ID_SQL = "SELECT * FROM helper WHERE id = ?";
-
     @Override
     public Helper getById(int id) {
         return jdbcTemplate.queryForObject(SELECT_BY_ID_SQL, new HelperMapper(), id);
     }
-//
-//    private final String SELECT_SQL = "SELECT * FROM helper";
 
+    private final String SELECT_BY_ID_SQL = "SELECT * FROM helper WHERE id = ?";
+
+//
     @Override
     public List<Helper> getByContact_Type(String contact_type) {return jdbcTemplate.query(SELECT_SQL, new HelperMapper(), contact_type);}
 
@@ -52,12 +52,10 @@ public class HelperRepositoryImpl implements HelperRepository {
 
     @Override
     public List<Helper> get() {
-        return jdbcTemplate.query(SELECT_SQL, new HelperMapper());
+        return jdbcTemplate.query(GET_SQL, new HelperMapper());
     }
 
-    private final String UPDATE_SQL = "UPDATE helper SET contact=?, contact_type=?, longitude=?, latitude=?, " +
-            "location_1_address=?, location_1_city=?, location_1_state=?, notes=?, phone_number=? WHERE id=?"
-            ;
+    private final String GET_SQL = "SELECT * FROM helper";
 
     @Override
     public void update(Helper helper, int id) {
@@ -66,12 +64,16 @@ public class HelperRepositoryImpl implements HelperRepository {
                 helper.getLocation_1_state(), helper.getNotes(), helper.getPhone_number(), id);
     }
 
-    private final String DELETE_SQL = "DELETE FROM helper WHERE id=?";
+    private final String UPDATE_SQL = "UPDATE helper SET contact=?, contact_type=?, longitude=?, latitude=?, " +
+            "location_1_address=?, location_1_city=?, location_1_state=?, notes=?, phone_number=? WHERE id=?"
+            ;
 
     @Override
     public void delete(int id) {
         jdbcTemplate.update(DELETE_SQL, id);
     }
+
+    private final String DELETE_SQL = "DELETE FROM helper WHERE id=?";
 
 
     // Map a row of the result set to a person object

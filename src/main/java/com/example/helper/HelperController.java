@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+
 import javax.annotation.PostConstruct;
 import javax.websocket.OnClose;
 import java.lang.reflect.Field;
@@ -26,8 +27,8 @@ public class HelperController {
     HelperService helperService;
 
     @PostConstruct
-    public void init(){
-        // First time running, call the repo's createTable() to build the table IF it does not already exist.
+    private void createTables(){
+        helperService.createTable();
     }
 
     // route consumes API above \
@@ -105,6 +106,13 @@ public class HelperController {
 
         return "redirect:/helpers.html";
     }
+
+    @RequestMapping("allResources")
+    public List<Helper> allResources() {
+        List<Helper> allResources = helperService.get();
+        return allResources;
+    }
+
 
     @RequestMapping(path = "/delete/{id}", method = RequestMethod.POST)
     public String delete(@PathVariable Integer id) {
