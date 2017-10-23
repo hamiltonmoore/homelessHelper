@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin 
 @RestController
 public class HelperController {
     final static String URL = "https://data.nashville.gov/resource/8zc7-2afq.json";
