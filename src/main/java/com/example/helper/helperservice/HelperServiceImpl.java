@@ -32,6 +32,11 @@ public class HelperServiceImpl implements HelperService {
         return helperRepository.get();
     }
 
+    @Override
+    public int count() {
+        return helperRepository.count();
+    }
+
     @Transactional
     @Override
     public void update(Helper helper, int id) {
@@ -44,6 +49,13 @@ public class HelperServiceImpl implements HelperService {
     public void delete(int id) {
         helperRepository.delete(id);
     }
+
+    @Transactional
+    @Override
+    public int deleteAll() {
+       return helperRepository.deleteAll();
+    }
+
 
     public void createTable() {
         helperRepository.createTable();

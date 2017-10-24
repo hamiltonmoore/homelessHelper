@@ -12,4 +12,6 @@ public interface HelperRepository {
     void update(Helper customer, int id);
     void createTable();
     void delete(int id);
+    int deleteAll();
+    int count();
 }

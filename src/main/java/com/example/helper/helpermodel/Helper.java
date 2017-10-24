@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 
 // Database model
 public class Helper {
+    String id;
     String contact;
     String contact_type;    // TODO: convert to Java naming convention
     Double longitude;
@@ -20,6 +21,7 @@ public class Helper {
 //        ,contact
 //        ,contact_type);
 //    }
+
 
 
     @Override
@@ -53,7 +55,15 @@ public class Helper {
     }
 
     public String getContact() {
-        return contact;
+        return id + contact;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setContact(String contact) {

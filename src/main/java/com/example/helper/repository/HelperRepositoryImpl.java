@@ -52,10 +52,15 @@ public class HelperRepositoryImpl implements HelperRepository {
 
     @Override
     public List<Helper> get() {
+        String GET_SQL = "SELECT * FROM helper";
         return jdbcTemplate.query(GET_SQL, new HelperMapper());
     }
 
-    private final String GET_SQL = "SELECT * FROM helper";
+    @Override
+    public int count() {
+        String COUNT_SQL = "SELECT count(*) FROM helper";
+        return jdbcTemplate.update(COUNT_SQL);
+    }
 
     @Override
     public void update(Helper helper, int id) {
@@ -75,13 +80,19 @@ public class HelperRepositoryImpl implements HelperRepository {
 
     private final String DELETE_SQL = "DELETE FROM helper WHERE id=?";
 
+    @Override
+    public int deleteAll() {
+        String DELETE_ALL_SQL = "DELETE * FROM helper";
+        return jdbcTemplate.update(DELETE_SQL);
+    }
 
     // Map a row of the result set to a person object
     private static class HelperMapper implements RowMapper<Helper> {
         @Override
         public Helper mapRow(ResultSet rs, int rowNum) throws SQLException {
             Helper helper = new Helper();
-            helper.setContact(rs.getString("contact"));
+            helper.setId(String.valueOf(rs.getInt("id")));
+            helper.setContact( rs.getString("contact") );
             helper.setContact_type(rs.getString("contact_type"));
             helper.setLongitude(rs.getDouble("longitude"));
             helper.setLatitude(rs.getDouble("latitude"));

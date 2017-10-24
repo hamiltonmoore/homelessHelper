@@ -14,12 +14,9 @@ import org.springframework.web.client.RestTemplate;
 import javax.annotation.PostConstruct;
 import javax.websocket.OnClose;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-@CrossOrigin 
+@CrossOrigin
 @RestController
 public class HelperController {
     final static String URL = "https://data.nashville.gov/resource/8zc7-2afq.json";
@@ -41,31 +38,39 @@ public class HelperController {
     //save Helper to db
 
     @RequestMapping(path = "/api/admin/loaddata", method = RequestMethod.GET)   // TODO: /{api-key}
-    public String loadData(Model model) {
+    public String loadData() {
         ApiResult[] results = getApiResult(URL);
-        model.addAttribute("helper", results);
 
-        for (ApiResult result : results) {
-            Helper helper = new Helper();
-            helper.setContact(result.getContact());
-            helper.setContact_type(result.getContact_type());
+        System.out.println("BEFORE: # of rows deleted = " + helperService.deleteAll());
 
-            Location location = result.getLocation_1();
+        Arrays.asList(results).stream()
+                .filter( result ->
+                    result.getContact_type().equals("Clothing") ||
+                            result.getContact_type().equals("Food Assistance") ||
+                            result.getContact_type().equals("Housing") ||
+                            result.getContact_type().equals("Transportation") )
+                .forEach( helper -> helperService.add(apiMapper(helper)) );
+        return String.valueOf(helperService.count()) + " Records added!";
+    }
 
-            if (location != null) {
-                helper.setLongitude(location.getCoordinates().get(0));
-                helper.setLatitude(location.getCoordinates().get(1));
-            }
+    private Helper apiMapper(ApiResult result) {
+        Helper helper = new Helper();
+        helper.setContact(result.getContact());
+        helper.setContact_type(result.getContact_type());
 
-            helper.setLocation_1_address(result.getLocation1Address());
-            helper.setLocation_1_city(result.getLocation_1_city());
-            helper.setLocation_1_state(result.getLocation_1_state());
-            helper.setNotes(result.getNotes());
-            helper.setPhone_number(result.getPhone_number());
+        Location location = result.getLocation_1();
 
-            helperService.add(helper);
+        if (location != null) {
+            helper.setLongitude(location.getCoordinates().get(0));
+            helper.setLatitude(location.getCoordinates().get(1));
         }
-        return "allresults";
+
+        helper.setLocation_1_address(result.getLocation1Address());
+        helper.setLocation_1_city(result.getLocation_1_city());
+        helper.setLocation_1_state(result.getLocation_1_state());
+        helper.setNotes(result.getNotes());
+        helper.setPhone_number(result.getPhone_number());
+        return helper;
     }
 
     public static ApiResult[] getApiResult(String route) {
