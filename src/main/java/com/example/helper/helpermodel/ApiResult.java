@@ -16,13 +16,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ApiResult {
     String contact;
-    String contact_type;
+    @JsonProperty("contact_type")
+    String contactType;
     Location location_1;    // TODO: convert all to Java proper names
     @JsonProperty("location_1_address")
     String location1Address;
-    String location_1_city;
+    @JsonProperty("location_1_city")
+    String location1city;
+    @JsonProperty("location_1_state")
     String location_1_state;
     String notes;
+    @JsonProperty("phone_number")
     String phone_number;
 
     public String getContact() {
@@ -33,12 +37,12 @@ public class ApiResult {
         this.contact = contact;
     }
 
-    public String getContact_type() {
-        return contact_type;
+    public String getContactType() {
+        return contactType;
     }
 
-    public void setContact_type(String contact_type) {
-        this.contact_type = contact_type;
+    public void setContactType(String contactType) {
+        this.contactType = contactType;
     }
 
     public Location getLocation_1() {
@@ -57,20 +61,20 @@ public class ApiResult {
         this.location1Address = location1Address;
     }
 
-    public String getLocation_1_city() {
-        return location_1_city;
+    public String getLocation1city() {
+        return location1city;
     }
 
-    public void setLocation_1_city(String location_1_city) {
-        this.location_1_city = location_1_city;
+    public void setLocation_1_city(String location1city) {
+        this.location1city = location1city;
     }
 
-    public String getLocation_1_state() {
+    public String getLocation1state() {
         return location_1_state;
     }
 
-    public void setLocation_1_state(String location_1_state) {
-        this.location_1_state = location_1_state;
+    public void setLocation1state(String location1state) {
+        this.location_1_state = location1state;
     }
 
     public String getNotes() {
@@ -81,11 +85,11 @@ public class ApiResult {
         this.notes = notes;
     }
 
-    public String getPhone_number() {
+    public String getphoneNumber() {
         return phone_number;
     }
 
-    public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phone_number = phoneNumber;
     }
 }

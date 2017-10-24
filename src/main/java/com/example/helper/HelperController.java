@@ -3,7 +3,6 @@ package com.example.helper;
 import com.example.helper.helpermodel.ApiResult;
 import com.example.helper.helpermodel.Helper;
 import com.example.helper.helpermodel.Location;
-import com.example.helper.helpermodel.ResultsPage;
 import com.example.helper.helperservice.HelperService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -12,8 +11,6 @@ import org.springframework.web.client.RestTemplate;
 
 
 import javax.annotation.PostConstruct;
-import javax.websocket.OnClose;
-import java.lang.reflect.Field;
 import java.util.*;
 
 @CrossOrigin
@@ -45,10 +42,10 @@ public class HelperController {
 
         Arrays.asList(results).stream()
                 .filter( result ->
-                    result.getContact_type().equals("Clothing") ||
-                            result.getContact_type().equals("Food Assistance") ||
-                            result.getContact_type().equals("Housing") ||
-                            result.getContact_type().equals("Transportation") )
+                    result.getContactType().equals("Clothing") ||
+                            result.getContactType().equals("Food Assistance") ||
+                            result.getContactType().equals("Housing") ||
+                            result.getContactType().equals("Transportation") )
                 .forEach( helper -> helperService.add(apiMapper(helper)) );
         return String.valueOf(helperService.count()) + " Records added!";
     }
@@ -56,7 +53,7 @@ public class HelperController {
     private Helper apiMapper(ApiResult result) {
         Helper helper = new Helper();
         helper.setContact(result.getContact());
-        helper.setContact_type(result.getContact_type());
+        helper.setContactType(result.getContactType());
 
         Location location = result.getLocation_1();
 
@@ -66,10 +63,10 @@ public class HelperController {
         }
 
         helper.setLocation_1_address(result.getLocation1Address());
-        helper.setLocation_1_city(result.getLocation_1_city());
-        helper.setLocation_1_state(result.getLocation_1_state());
+        helper.setLocation_1_city(result.getLocation1city());
+        helper.setLocation_1_state(result.getLocation1state());
         helper.setNotes(result.getNotes());
-        helper.setPhone_number(result.getPhone_number());
+        helper.setPhone_number(result.getphoneNumber());
         return helper;
     }
 
@@ -82,13 +79,13 @@ public class HelperController {
 
     @RequestMapping("/api/resources/{variable}")
     public List<Helper> resources(@PathVariable String variable) {
-        List<Helper> results = helperService.getByContact_Type(variable);
+        List<Helper> results = helperService.getByContactType(variable);
         return results;
     }
 
     @RequestMapping(path = "/add_resource", method = RequestMethod.POST)
     public String createResoure(@RequestParam(value = "Contact") String Contact,
-                                @RequestParam(value = "Contact_type") String Contact_type,
+                                @RequestParam(value = "Contact_type") String ContactType,
                                 @RequestParam(value = "longitude") Double longitude,
                                 @RequestParam(value = "latitude") Double latitude,
                                 @RequestParam(value = "location_1_address") String location_1_address,
@@ -99,7 +96,7 @@ public class HelperController {
         Helper helper = new Helper();
 
         helper.setContact(Contact);
-        helper.setContact_type(Contact_type);
+        helper.setContactType(ContactType);
         helper.setLongitude(longitude);
         helper.setLatitude(latitude);
         helper.setLocation_1_address(location_1_address);
@@ -128,7 +125,7 @@ public class HelperController {
 
     @RequestMapping(path = "/update/{id}", method = RequestMethod.POST)
     public String update(@PathVariable Integer id, Helper helper) {
-        helperService.update(helper, id);   //this bit may need to be by id, right now customerService reflects customer
+        helperService.update(helper, id);
         return "redirect:/customers.html";
     }
 }
