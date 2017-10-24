@@ -25,7 +25,7 @@ public class HelperServiceImpl implements HelperService {
     }
 
     @Override
-    public List<Helper> getByContactType(String contactType) {return helperRepository.getByContactType(contactType);}
+    public List<Helper> getByContact_type(String contact_Type) {return helperRepository.getByContact_type(contact_Type);}
 
     @Override
     public List<Helper> get() {

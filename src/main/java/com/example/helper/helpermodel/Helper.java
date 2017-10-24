@@ -6,7 +6,7 @@ import java.lang.reflect.Field;
 public class Helper {
     String id;
     String contact;
-    String contactType;    // TODO: convert to Java naming convention
+    String contact_type;    // TODO: convert to Java naming convention
     Double longitude;
     Double latitude;
     String location_1_address;
@@ -70,12 +70,12 @@ public class Helper {
         this.contact = contact;
     }
 
-    public String getContactType() {
-        return contactType;
+    public String getContact_type() {
+        return contact_type;
     }
 
-    public void setContactType(String contactType) {
-        this.contactType = contactType;
+    public void setContact_type(String contact_type) {
+        this.contact_type = contact_type;
     }
 
     public Double getLongitude() {

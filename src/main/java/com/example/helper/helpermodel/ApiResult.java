@@ -16,17 +16,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ApiResult {
     String contact;
-    @JsonProperty("contact_type")
-    String contactType;
+    String contact_type;
     Location location_1;    // TODO: convert all to Java proper names
-    @JsonProperty("location_1_address")
-    String location1Address;
-    @JsonProperty("location_1_city")
-    String location1city;
-    @JsonProperty("location_1_state")
+    String location_1_Address;
+    String location_1_city;
     String location_1_state;
     String notes;
-    @JsonProperty("phone_number")
     String phone_number;
 
     public String getContact() {
@@ -37,12 +32,12 @@ public class ApiResult {
         this.contact = contact;
     }
 
-    public String getContactType() {
-        return contactType;
+    public String getContact_type() {
+        return contact_type;
     }
 
-    public void setContactType(String contactType) {
-        this.contactType = contactType;
+    public void setContact_type(String contact_type) {
+        this.contact_type = contact_type;
     }
 
     public Location getLocation_1() {
@@ -53,28 +48,28 @@ public class ApiResult {
         this.location_1 = location_1;
     }
 
-    public String getLocation1Address() {
-        return location1Address;
+    public String getLocation_1_Address() {
+        return location_1_Address;
     }
 
-    public void setLocation1Address(String location1Address) {
-        this.location1Address = location1Address;
+    public void setLocation_1_Address(String location_1_Address) {
+        this.location_1_Address = location_1_Address;
     }
 
-    public String getLocation1city() {
-        return location1city;
+    public String getLocation_1_city() {
+        return location_1_city;
     }
 
-    public void setLocation_1_city(String location1city) {
-        this.location1city = location1city;
+    public void setLocation_1_city(String location_1_city) {
+        this.location_1_city = location_1_city;
     }
 
-    public String getLocation1state() {
+    public String getLocation_1_state() {
         return location_1_state;
     }
 
-    public void setLocation1state(String location1state) {
-        this.location_1_state = location1state;
+    public void setLocation_1_state(String location_1_state) {
+        this.location_1_state = location_1_state;
     }
 
     public String getNotes() {
@@ -85,11 +80,11 @@ public class ApiResult {
         this.notes = notes;
     }
 
-    public String getphoneNumber() {
+    public String getphone_number() {
         return phone_number;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phone_number = phoneNumber;
+    public void setPhone_number(String phone_number) {
+        this.phone_number = phone_number;
     }
 }

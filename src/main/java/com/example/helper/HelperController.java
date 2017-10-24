@@ -42,10 +42,10 @@ public class HelperController {
 
         Arrays.asList(results).stream()
                 .filter( result ->
-                    result.getContactType().equals("Clothing") ||
-                            result.getContactType().equals("Food Assistance") ||
-                            result.getContactType().equals("Housing") ||
-                            result.getContactType().equals("Transportation") )
+                    result.getContact_type().equals("Clothing") ||
+                            result.getContact_type().equals("Food Assistance") ||
+                            result.getContact_type().equals("Housing") ||
+                            result.getContact_type().equals("Transportation") )
                 .forEach( helper -> helperService.add(apiMapper(helper)) );
         return String.valueOf(helperService.count()) + " Records added!";
     }
@@ -53,7 +53,7 @@ public class HelperController {
     private Helper apiMapper(ApiResult result) {
         Helper helper = new Helper();
         helper.setContact(result.getContact());
-        helper.setContactType(result.getContactType());
+        helper.setContact_type(result.getContact_type());
 
         Location location = result.getLocation_1();
 
@@ -62,11 +62,11 @@ public class HelperController {
             helper.setLatitude(location.getCoordinates().get(1));
         }
 
-        helper.setLocation_1_address(result.getLocation1Address());
-        helper.setLocation_1_city(result.getLocation1city());
-        helper.setLocation_1_state(result.getLocation1state());
+        helper.setLocation_1_address(result.getLocation_1_Address());
+        helper.setLocation_1_city(result.getLocation_1_city());
+        helper.setLocation_1_state(result.getLocation_1_state());
         helper.setNotes(result.getNotes());
-        helper.setPhone_number(result.getphoneNumber());
+        helper.setPhone_number(result.getphone_number());
         return helper;
     }
 
@@ -79,13 +79,13 @@ public class HelperController {
 
     @RequestMapping("/api/resources/{variable}")
     public List<Helper> resources(@PathVariable String variable) {
-        List<Helper> results = helperService.getByContactType(variable);
+        List<Helper> results = helperService.getByContact_type(variable);
         return results;
     }
 
     @RequestMapping(path = "/add_resource", method = RequestMethod.POST)
     public String createResoure(@RequestParam(value = "Contact") String Contact,
-                                @RequestParam(value = "Contact_type") String ContactType,
+                                @RequestParam(value = "Contact_type") String Contact_type,
                                 @RequestParam(value = "longitude") Double longitude,
                                 @RequestParam(value = "latitude") Double latitude,
                                 @RequestParam(value = "location_1_address") String location_1_address,
@@ -96,7 +96,7 @@ public class HelperController {
         Helper helper = new Helper();
 
         helper.setContact(Contact);
-        helper.setContactType(ContactType);
+        helper.setContact_type(Contact_type);
         helper.setLongitude(longitude);
         helper.setLatitude(latitude);
         helper.setLocation_1_address(location_1_address);

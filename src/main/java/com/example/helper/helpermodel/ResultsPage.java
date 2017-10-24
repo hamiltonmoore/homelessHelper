@@ -16,6 +16,6 @@ public class ResultsPage {
         this.results = results;
     }
 }
-    // ApiResults contains all field names including location_1 of type location which contains coordinates (ignore things here too)
+
 
 

@@ -32,7 +32,7 @@ public class HelperRepositoryImpl implements HelperRepository {
     @Override
     public void add(Helper helper) {
         System.out.println("*** helper = " + helper.toString());
-        jdbcTemplate.update(INSERT_SQL, helper.getContact(), helper.getContactType(), helper.getLongitude(),
+        jdbcTemplate.update(INSERT_SQL, helper.getContact(), helper.getContact_type(), helper.getLongitude(),
                 helper.getLatitude(), helper.getLocation_1_address(), helper.getLocation_1_city(),
                 helper.getLocation_1_state(), helper.getNotes(), helper.getPhone_number());
     }
@@ -48,7 +48,7 @@ public class HelperRepositoryImpl implements HelperRepository {
 private final String SELECT_SQL = "SELECT * FROM helper WHERE contact_type = ?";
 
     @Override
-    public List<Helper> getByContactType(String contactType) {return jdbcTemplate.query(SELECT_SQL, new HelperMapper(), contactType);}
+    public List<Helper> getByContact_type(String contact_type) {return jdbcTemplate.query(SELECT_SQL, new HelperMapper(), contact_type);}
 
     @Override
     public List<Helper> get() {
@@ -68,7 +68,7 @@ private final String SELECT_SQL = "SELECT * FROM helper WHERE contact_type = ?";
 
     @Override
     public void update(Helper helper, int id) {
-        jdbcTemplate.update(UPDATE_SQL, helper.getContact(), helper.getContactType(), helper.getLatitude(),
+        jdbcTemplate.update(UPDATE_SQL, helper.getContact(), helper.getContact_type(), helper.getLatitude(),
                 helper.getLongitude(), helper.getLocation_1_address(), helper.getLocation_1_city(),
                 helper.getLocation_1_state(), helper.getNotes(), helper.getPhone_number(), id);
     }
@@ -93,7 +93,7 @@ private final String SELECT_SQL = "SELECT * FROM helper WHERE contact_type = ?";
             Helper helper = new Helper();
             helper.setId(String.valueOf(rs.getInt("id")));
             helper.setContact( rs.getString("contact") );
-            helper.setContactType(rs.getString("contactType"));
+            helper.setContact_type(rs.getString("contact_type"));
             helper.setLongitude(rs.getDouble("longitude"));
             helper.setLatitude(rs.getDouble("latitude"));
             helper.setLocation_1_address(rs.getString("location_1_address"));
