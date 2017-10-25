@@ -82,7 +82,7 @@ private final String SELECT_SQL = "SELECT * FROM helper WHERE contact_type = ?";
 
     @Override
     public int deleteAll() {
-        String DELETE_ALL_SQL = "DELETE * FROM helper";
+        String DELETE_ALL_SQL = "DELETE FROM helper";
         return jdbcTemplate.update(DELETE_ALL_SQL);
     }
 
