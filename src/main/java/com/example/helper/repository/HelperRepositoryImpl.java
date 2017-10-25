@@ -58,8 +58,8 @@ private final String SELECT_SQL = "SELECT * FROM helper WHERE contact_type = ?";
 
     @Override
     public int count() {
-        String COUNT_SQL = "SELECT count(*) FROM helper";
-        return jdbcTemplate.update(COUNT_SQL);
+//        String COUNT_SQL = "SELECT count(*) FROM helper";
+        return jdbcTemplate.getMaxRows();
     }
 
     private final String UPDATE_SQL = "UPDATE helper SET contact=?, contact_type=?, longitude=?, latitude=?, " +

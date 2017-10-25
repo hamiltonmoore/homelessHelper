@@ -62,7 +62,7 @@ public class HelperController {
             helper.setLatitude(location.getCoordinates().get(1));
         }
 
-        helper.setLocation_1_address(result.getLocation_1_Address());
+        helper.setLocation_1_address(result.getLocation_1_address());
         helper.setLocation_1_city(result.getLocation_1_city());
         helper.setLocation_1_state(result.getLocation_1_state());
         helper.setNotes(result.getNotes());

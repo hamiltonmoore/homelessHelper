@@ -18,7 +18,7 @@ public class ApiResult {
     String contact;
     String contact_type;
     Location location_1;    // TODO: convert all to Java proper names
-    String location_1_Address;
+    String location_1_address;
     String location_1_city;
     String location_1_state;
     String notes;
@@ -48,12 +48,12 @@ public class ApiResult {
         this.location_1 = location_1;
     }
 
-    public String getLocation_1_Address() {
-        return location_1_Address;
+    public String getLocation_1_address() {
+        return location_1_address;
     }
 
-    public void setLocation_1_Address(String location_1_Address) {
-        this.location_1_Address = location_1_Address;
+    public void setLocation_1_address(String location_1_address) {
+        this.location_1_address = location_1_address;
     }
 
     public String getLocation_1_city() {
