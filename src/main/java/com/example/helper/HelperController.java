@@ -38,8 +38,6 @@ public class HelperController {
     public String loadData() {
         ApiResult[] results = getApiResult(URL);
 
-        System.out.println("BEFORE: # of rows deleted = " + helperService.deleteAll());
-
         Arrays.asList(results).stream()
                 .filter( result ->
                     result.getContact_type().equals("Clothing") ||
@@ -47,7 +45,6 @@ public class HelperController {
                             result.getContact_type().equals("Housing") ||
                             result.getContact_type().equals("Transportation") )
                 .forEach( helper -> helperService.add(apiMapper(helper)) );
-        return String.valueOf(helperService.count()) + " Records added!";
     }
 
     private Helper apiMapper(ApiResult result) {
