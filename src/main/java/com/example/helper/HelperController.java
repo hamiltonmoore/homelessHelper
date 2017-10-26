@@ -45,7 +45,9 @@ public class HelperController {
                     result.getContact_type().equals("Clothing") ||
                             result.getContact_type().equals("Food Assistance") ||
                             result.getContact_type().equals("Housing") ||
-                            result.getContact_type().equals("Transportation") )
+                            result.getContact_type().equals("Transportation") ||
+                            result.getContact_type().equals("Job Training & Placement")
+                )
                 .forEach( helper -> helperService.add(apiMapper(helper)) );
         return String.valueOf(helperService.count()) + " Records added!";
     }
